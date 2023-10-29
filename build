@@ -46,14 +46,14 @@ fi
 
 cd "$SRC"
 
-if test -z "$XMB" || test "$SRC/xmobar.hs" -nt "$XMB"; then
-  ghcup -c run --ghc "$GHC" --cabal "$CBL" -- cabal install config \
-    --enable-executable-stripping \
-    --enable-optimization=2 \
-    --overwrite-polic=always \
-    --installdir="$DST"
-  ERR=$?
-fi
+# if test -z "$XMB" || test "$SRC/Main.hs" -nt "$XMB"; then
+ghcup -c run --ghc "$GHC" --cabal "$CBL" -- cabal install config \
+  --enable-executable-stripping \
+  --enable-optimization=2 \
+  --overwrite-polic=always \
+  --installdir="$DST"
+ERR=$?
+# fi
 
 if test "$ERR" -ne 0; then
   >&2 echo "ERROR: build failure"

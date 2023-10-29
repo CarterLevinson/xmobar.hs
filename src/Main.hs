@@ -17,7 +17,8 @@ config =
       , additionalFonts =
           [ "xft:Symbols Nerd Font:pixelsize=14:antialaias=true:hinting=true" ]
       , commands =
-          [ Run $ XPropertyLog "_XMONAD_LOG_0"
+          [ Run XMonadLog
+          -- [ Run $ XPropertyLog "_XMONAD_LOG_0"
 
           , Run $ Cpu
               [ "-t", "<total>%"
@@ -80,8 +81,6 @@ config =
               ["-t", "<fn=1>\xF9E1</fn> Swap: <usedratio>%"]
               10
 
-          , Run $ Date "<fn=1>\xF273</fn> %a %m-%d-%Y" "date" 10
-          , Run $ Date "<fc=#FFFFFF>%H:%M</fc>" "time" 10
 
           , Run $ Uptime ["-t", "Up: <days>d <hours>h"] 360
 
