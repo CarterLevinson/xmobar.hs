@@ -28,16 +28,35 @@ import Monitors
 
 -- layout = icon "lambda222.xpm" ++ %_XMONAD_LOG_TOP% ++ "}{"
 
+swap = Swap ["-t", swapNF ++ " <usedratio>", "-S", "On" ] 10
 
-swap = Swap
-    ["-t", swapNF ++ " <usedratio>", "-s", "On"]
-    10
+swapBar = Com "bash" ["/home/carterlevo/.xmobar/scripts/swap.sh"] "swapbar" 10
 
-makeTemplate = icon "lambda-white-20x20.xpm" ++ " %alsa:default:Master% "
-    ++ "| "  ++ serverNF ++ " %dynnetwork% %wlp8s0wi% "
-    ++ "}{ " ++ cpuMS    ++ " %multicpu% %cpufreq% %multicoretemp% "
-    ++ "| "  ++ memMS    ++ " %memory% "
-    ++ "| "  ++ diskNF   ++ " %disku% "
+-- makeTemplate = icon "haskell-logo-20x20.xpm"
+--     ++ " %wlp8s0wi% %dynnetwork% | "
+--     ++ cpuMS ++ " %multicpu% %cpufreq% %multicoretemp% | "
+--     ++ " }{  | "
+--     ++ memMS ++ " %memory% %swap% | "
+--     ++ diskNF ++ " %disku% " ++ serverNF ++ " | "
+--     ++ "%alsa:default:Master% "
+--
+makeTemplate = ""
+    -- icon "haskell-logo-20x20.xpm" ++ " "
+    ++ lbar " %wlp8s0wi% " ++ "%dynnetwork% "
+    ++ lbar (" " ++ cpuMS )
+    ++ rbar " %multicpu% %cpufreq% %multicoretemp% "
+    ++ " }{ "
+    ++ lbar (" " ++  memMS)
+    ++ " %memory% " ++ swapNF ++ " %swapbar% "
+    ++ lbar (" " ++ diskNF)
+    ++ " %disku% " ++ serverNF ++ " "
+    ++ lbar " %alsa:default:Master% "
+
+-- makeTemplate = icon "haskell-logo-white-20x20.xpm" ++ " %alsa:default:Master% "
+--     ++ "| "  ++ serverNF ++ " %dynnetwork% %wlp8s0wi% "
+--     ++ "}{ " ++ cpuMS    ++ " %multicpu% %cpufreq% %multicoretemp% "
+--     ++ "| "  ++ memMS    ++ " %memory% "
+--     ++ "| "  ++ diskNF   ++ " %disku% "
 
     -- , CPU -- bar, temp, freq
     -- , Memory -- bar,
@@ -62,6 +81,7 @@ runnables =
     , Run $ wireless baseDark "wlp8s0"
     , Run $ masterVolumeAlsa baseDark "default"
     , Run swap
+    , Run swapBar
     ]
 
 config =

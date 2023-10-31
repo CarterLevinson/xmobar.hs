@@ -2,6 +2,11 @@ module Icons
     ( archNF
     , bellNF
     , lambdaNF
+    , musicNF
+    , upNF
+    , downNF
+    , up2NF
+    , down2NF
     , piNF
     , clockNF
     , calendarNF
@@ -43,6 +48,11 @@ muteNF         = nf "\xF0E08"
 spotifyNF      = nf "\xF1BC"
 wifiOnNF       = nf "\xF1EB"
 wifiOffNF      = nf "\xF05AA"
+upNF           = nf "\xF0AA"
+downNF         = nf "\xF0AB"
+up2NF          = nf "\xF176"
+down2NF        = nf "\xF175"
+musicNF        = nf "\xF001"
 
 -- storage = "\xe1db"
 

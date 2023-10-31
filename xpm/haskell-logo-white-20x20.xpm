@@ -1,0 +1,35 @@
+/* XPM */
+static char *haskell_logo_20x20[] = {
+/* columns rows colors chars-per-pixel */
+"20 14 15 1 ",
+"  c None",
+". c #636363",
+"X c #646464",
+"o c #656565",
+"O c #666666",
+"+ c #E5E4E2",
+"@ c #E5E4E3",
+"# c #E6E5E3",
+"$ c #E6E5E4",
+"% c #E8E7E5",
+"& c #E8E7E6",
+"* c #E9ECF1",
+"= c #EAEDF2",
+"- c #EBEEF3",
+"; c #ECEFF4",
+/* pixels */
+"OOOO $###           ",
+" OOOO ###           ",
+"  OOO %###          ",
+"  OOOO ####         ",
+"   OOO. ###  =======",
+"    OOO %### =;;;;;;",
+"    OOOO ####       ",
+"    OOOO ####       ",
+"    OOO $##### =;;;;",
+"   OOO. ######+ =;;;",
+"  OOOO #### ###     ",
+"  OOO %###  ####    ",
+" OOO. ###    ####   ",
+"OOOO $###     ###   "
+};

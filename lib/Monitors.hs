@@ -90,7 +90,7 @@ cpuTemp p =
      in MultiCoreTemp (mkArgs p args exts) 20
 
 memory p =
-    let args = [ "-t", "[<usedbar>] <used>M"
+    let args = [ "-t", "[<usedbar>]" -- <used>M
                , "-b", "•"
                , "-H", "75"
                , "-L", "25"
@@ -112,9 +112,7 @@ diskIO p disks =
      in DiskIO disks [] 10
 
 networkIO p =
-    let args = [ "-t", ""
-                       ++ fn 1 "\xF0AA" ++ " [<txbar>] "
-                       ++ fn 1 "\xF0AB" ++ " [<rxbar>]"
+    let args = [ "-t", up2NF ++ " [<txbar>] " ++ down2NF ++ " [<rxbar>]"
                , "-b", "•"
                ]
      in DynNetwork (p <~> args) 20

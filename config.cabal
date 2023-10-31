@@ -1,8 +1,8 @@
 cabal-version:      3.0
 name:               config
 version:            0.1.0.0
--- synopsis:
--- description:
+synopsis:           Xmobar configuration
+description:        Status bar configuration for Xmobar and XMonad
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             Carter S. Levinson
@@ -10,20 +10,18 @@ maintainer:         carter@levinson.cc
 copyright:          2023
 category:           Desktop
 build-type:         Simple
-extra-doc-files:    CHANGELOG.md
--- extra-source-files:
+extra-doc-files:    CHANGELOG.md, README.md
 
 common warnings
-    ghc-options: -Wall
+  ghc-options:      -Wall
 
 common language
-    default-language: Haskell2010
+  default-language: Haskell2010
 
 common dependencies
-    build-depends: base >= 4.11 && < 5,
-                   containers,
-                   xmobar,
-
+  build-depends:    base >= 4.11 && < 5,
+                    containers,
+                    xmobar,
 library
   import:           warnings,
                     dependencies,
@@ -33,8 +31,6 @@ library
                     Utils,
                     Plugins,
                     Monitors
-  -- other-modules:    Xmobar.Plugins.Monitors
-
   hs-source-dirs:   lib
 
 executable xmobar-top
@@ -43,8 +39,6 @@ executable xmobar-top
                     language
   main-is:          Top.hs
   build-depends:    config
-  -- other-modules:
-  -- other-extensions:
   hs-source-dirs:   src
 
 executable xmobar-bot
@@ -53,16 +47,12 @@ executable xmobar-bot
                     language
   main-is:          Bot.hs
   build-depends:    config
-  -- other-modules:
-  -- other-extensions:
   hs-source-dirs:   src
 
-executable xmobar-main
+executable xmobar-single
   import:           warnings,
                     dependencies,
                     language
-  main-is:          Main.hs
+  main-is:          Single.hs
   build-depends:    config
-  -- other-modules:
-  -- other-extensions:
   hs-source-dirs:   src
