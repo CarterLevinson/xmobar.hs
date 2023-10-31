@@ -1,10 +1,17 @@
 module Monitors where
 
-import Xmobar
 import Config
-import Utils
 import Icons
+import Utils
+import Xmobar
 
+kernel :: Command
+kernel = Com "bash"
+    [ "-c", "uname" ++ " " ++ "-r" ]
+    "kernel"
+    3600000
+
+wireless :: Palette -> Interface -> Monitors
 wireless p n =
     let args = [ "-t", wifiOnNF ++ " [<qualitybar>] <signal>dBm"
                , "-b", "•"
@@ -21,6 +28,7 @@ wireless p n =
 
 -- networkUP
 
+masterVolumeAlsa :: Palette -> String -> Monitors
 masterVolumeAlsa p mixer = Alsa mixer
     "Master"
     [ "-t", click "pulseaudio-ctl mute" "[<status>]" ++ " [<volumebar>]"
@@ -32,6 +40,7 @@ masterVolumeAlsa p mixer = Alsa mixer
     , "-c", "#8B4726"
     ]
 
+weatherX' :: Station -> Args -> Rate -> Monitors
 weatherX' station = WeatherX station
     [ ("", "")
     , ("clear", fn 1 "\xF0599")
@@ -56,6 +65,7 @@ weatherX' station = WeatherX station
     , ("snow", "❄️")
     ]
 
+weatherX :: Palette -> Station -> Monitors
 weatherX p station =
     let args = [ "-t", "<skyConditionS> <tempC>°C"
                , "-L", "0"
@@ -63,6 +73,7 @@ weatherX p station =
                ]
      in weatherX' station (p <~> args) 3600
 
+cpuBar :: Palette -> Monitors
 cpuBar p =
     let args = [ "-t", "[<bar>]"
                , "-b", "•"
@@ -72,6 +83,7 @@ cpuBar p =
      in MultiCpu (p <~> args) 10
 
 
+cpuFreq :: Palette -> Monitors
 cpuFreq p =
     let args = [ "-t", "<avg>GHz"
                , "-H", "4"
@@ -79,6 +91,7 @@ cpuFreq p =
                ]
      in CpuFreq (p <~> args) 20
 
+cpuTemp :: Palette -> Monitors
 cpuTemp p =
     let args = [ "-t", "<avg>°C" --, "Temp: <avgpc>%"
                , "-L", "60"
@@ -89,6 +102,7 @@ cpuTemp p =
                ]
      in MultiCoreTemp (mkArgs p args exts) 20
 
+memory :: Palette -> Monitors
 memory p =
     let args = [ "-t", "[<usedbar>]" -- <used>M
                , "-b", "•"
@@ -97,6 +111,7 @@ memory p =
                ]
      in Memory (p <~> args) 10
 
+diskU :: Palette -> DiskSpec -> Monitors
 diskU p disks =
     let args = [ "-b", "•"
                -- , "-m", "1"
@@ -106,21 +121,15 @@ diskU p disks =
                ]
      in DiskU disks (p <~> args) 30
 
+diskIO :: Palette -> DiskSpec -> Monitors
 diskIO p disks =
     let args = []
         pal  = (p <~> args)
      in DiskIO disks [] 10
 
+networkIO :: Palette -> Monitors
 networkIO p =
     let args = [ "-t", up2NF ++ " [<txbar>] " ++ down2NF ++ " [<rxbar>]"
                , "-b", "•"
                ]
      in DynNetwork (p <~> args) 20
-
-
-
-
--- kernelVersion = Com "bash"
---     [ "-c", "uname" ++ " " ++ "-r" ]
---     "kernel"
---     3600000

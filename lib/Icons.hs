@@ -1,31 +1,6 @@
-module Icons
-    ( archNF
-    , bellNF
-    , lambdaNF
-    , musicNF
-    , upNF
-    , downNF
-    , up2NF
-    , down2NF
-    , piNF
-    , clockNF
-    , calendarNF
-    , serverNF
-    , diskNF
-    , mailNF
-    , volNF
-    , muteNF
-    , swapNF
-    , sunNF
-    , spotifyNF
-    , cloudNF
-    , cloudsNF
-    , wifiOnNF
-    , wifiOffNF
-    , cpuMS
-    , memMS
-    , memAltMS
-    ) where
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+
+module Icons where
 
 import Utils (fn)
 
@@ -34,6 +9,7 @@ import Utils (fn)
 nf             = fn 1
 
 archNF         = nf "\xF303"
+
 bellNF         = nf "\xF0A2"
 lambdaNF       = nf "\xFB26"
 piNF           = nf "\xE22C"
