@@ -12,7 +12,7 @@ import Monitors
 
 time, cal :: Date
 cal = Date
-    "%m-%d-%Y"
+    "%B %e %Y"
     "calendar"
     360000
 time = Date
@@ -22,8 +22,9 @@ time = Date
 
 mailx :: MailX
 mailx = MailX
-    [ ("G", "gmail/Inbox", "green")
+    [ ("G", "gmail/Inbox", "blue")
     , ("P", "posteo/Inbox", "orange")
+    , ("WS", "workspace/Inbox", "purple")
     ]
     [ "-d", "~/mail", "-p", " "]
     "mailx"
@@ -73,9 +74,10 @@ makeLayout =
     ++ lbar (" " ++ clockNF)
     ++ " %uptime% "
     ++ lbar (" " ++ calendarNF)
-    ++ rbar " %time% %cal% "
+    ++ rbar " %time% "
+    -- ++ rbar " %cal% "
     ++ " "
-    ++ icon "haskell-logo-20x20.xpm"
+    ++ icon "xmonad-logo-2022-20x20.xpm"
     ++ " "
 
 config :: Config

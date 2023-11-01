@@ -3,6 +3,7 @@ name:               config
 version:            0.1.0.0
 synopsis:           Xmobar configuration
 description:        Status bar configuration for Xmobar and XMonad
+-- homepage:
 license:            BSD-3-Clause
 license-file:       LICENSE
 author:             Carter S. Levinson
@@ -12,16 +13,41 @@ category:           Desktop
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md, README.md
 
-common warnings
+common              warnings
   ghc-options:      -Wall
 
-common language
+common              language
   default-language: Haskell2010
 
-common dependencies
+common              dependencies
   build-depends:    base >= 4.11 && < 5,
                     containers,
-                    xmobar,
+                    xmobar
+
+executable          xmobar-top
+  import:           warnings,
+                    dependencies,
+                    language
+  main-is:          Top.hs
+  build-depends:    config
+  hs-source-dirs:   src
+
+executable          xmobar-bot
+  import:           warnings,
+                    dependencies,
+                    language
+  main-is:          Bot.hs
+  build-depends:    config
+  hs-source-dirs:   src
+
+executable          xmobar-single
+  import:           warnings,
+                    dependencies,
+                    language
+  main-is:          Single.hs
+  build-depends:    config
+  hs-source-dirs:   src
+
 library
   import:           warnings,
                     dependencies,
@@ -32,27 +58,3 @@ library
                     Plugins,
                     Monitors
   hs-source-dirs:   lib
-
-executable xmobar-top
-  import:           warnings,
-                    dependencies,
-                    language
-  main-is:          Top.hs
-  build-depends:    config
-  hs-source-dirs:   src
-
-executable xmobar-bot
-  import:           warnings,
-                    dependencies,
-                    language
-  main-is:          Bot.hs
-  build-depends:    config
-  hs-source-dirs:   src
-
-executable xmobar-single
-  import:           warnings,
-                    dependencies,
-                    language
-  main-is:          Single.hs
-  build-depends:    config
-  hs-source-dirs:   src
