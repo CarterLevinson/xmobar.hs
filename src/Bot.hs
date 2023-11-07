@@ -34,12 +34,6 @@ uptime = Uptime
     [ "-t", "<days>d <hours>h" ]
     36000
 
-playerctld :: Monitors
-playerctld = Mpris2 "playerctld"
-    [ "-t", musicNF ++ " <artist> - <title> [<album>] " ++ spotifyNF
-    , "-x", ""
-    ]
-    10
 
 updates :: Command
 updates = Com "bash"
@@ -56,7 +50,6 @@ runnables =
     , Run cal
     , Run uptime
     , Run updates
-    , Run playerctld
     , Run $ weatherX baseDark "KMDW"
     , Run $ wireless baseDark "wlp8s0"
     ]
@@ -65,7 +58,7 @@ makeLayout :: String
 makeLayout =
     icon "arch-linux-white-20x20.xpm"
     ++ " %_XMONAD_LOG_BOT% "
-    ++ "} %mpris2% {"
+    ++ " }{ "
     ++ lbar (" " ++ mailNF)
     ++ "%mailx% "
     ++ lbar (" " ++ bellNF)

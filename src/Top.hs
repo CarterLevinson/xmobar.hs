@@ -5,6 +5,12 @@ import Icons
 import Utils
 import Monitors
 
+playerctld :: Monitors
+playerctld = Mpris2 "playerctld"
+    [ "-t", musicNF ++ " <artist> - <title> [<album>] " ++ spotifyNF
+    , "-x", ""
+    ]
+    10
 
 swap :: Monitors
 swap =
@@ -40,6 +46,7 @@ runnables =
     , Run $ cpuBar baseDark
     , Run $ cpuTemp baseDark
     , Run $ memory baseDark
+    , Run playerctld
     , Run swapbar
     , Run swap
     ]
@@ -49,7 +56,7 @@ makeLayout =
     lbar " %wlp8s0wi% " ++ "%dynnetwork% "
     ++ lbar (" " ++ cpuMS )
     ++ rbar " %multicpu% %cpufreq% %multicoretemp% "
-    ++ " }{ "
+    ++ "} %mpris2% {"
     ++ lbar (" " ++  memMS)
     ++ " %memory% " ++ swapNF ++ " %swapbar% "
     ++ lbar (" " ++ diskNF)

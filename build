@@ -7,8 +7,8 @@ SRC="$HOME/.xmobar"
 DST="$HOME/bin"
 
 # cabal version
-# CBL="3.8.1.0"
-CBL="3.6.2.0"
+CBL="3.10.1.0"
+# CBL="3.6.2.0"
 
 # set the return code
 ERR=0
