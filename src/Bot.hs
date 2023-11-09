@@ -93,6 +93,7 @@ config =
         , border   = NoBorder
         , commands = runnables
         , template = makeLayout
+        , wmName   = "xmobar-bot"
         }
 
 main :: IO ()

@@ -42,19 +42,18 @@ baseDark= Palette
 
 base :: Palette -> Config
 base p = defaultConfig
-    { font              = pFont p
-    , alpha             = pAlpha p
-    , iconRoot          = pIconRoot p
-    , borderColor       = pBorder p
-    , border            = NoBorder
-    , bgColor           = pBackground p
-    , fgColor           = pForeground p
-    -- , textOffset        = 2
-    -- , overrideRedirect = False
-    -- , allDesktops      = True
-    -- , persistent       = False
-    , additionalFonts   =
-        [ "Symbols Nerd Font 12"
+    { font             = pFont p
+    , alpha            = pAlpha p
+    , iconRoot         = pIconRoot p
+    , bgColor          = pBackground p
+    , fgColor          = pForeground p
+    , borderColor      = pBorder p
+    , border           = NoBorder
+    , persistent       = False
+    , allDesktops      = True
+    , overrideRedirect = True
+    , additionalFonts  =
+        [ "Symbols Nerd Font 14"
         , "Material Symbols Sharp 14"
         ]
     }
