@@ -13,7 +13,7 @@ kernel = Com "bash"
 
 wireless :: Palette -> Interface -> Monitors
 wireless p n =
-    let args = [ "-t", wifiOnNF ++ " [<qualitybar>] <signal>dBm"
+    let args = [ "-t", "[<qualitybar>]" -- <signal>dBm"
                , "-b", "•"
                , "-x", ""
                -- fc (pLow p) (fni "\xf1eb " ++ "<essid>")
@@ -28,17 +28,25 @@ wireless p n =
 
 -- networkUP
 
-masterVolumeAlsa :: Palette -> String -> Monitors
-masterVolumeAlsa p mixer = Alsa mixer
-    "Master"
-    [ "-t", click "pulseaudio-ctl mute" "[<status>]" ++ " [<volumebar>]"
-    , "-b", "•"
-    , "--"
-    , "-O", volNF
-    , "-o", muteNF
-    , "-C", pForeground p
-    , "-c", "#8B4726"
-    ]
+masterVolumeAlsa :: Palette -> Orientation -> String -> Monitors
+masterVolumeAlsa p o mixer =
+    let mute = click "pulseaudio-ctl mute"
+        temp = case o of
+                 LeftSide  ->
+                     mute "[<status>]" ++ " [<volumebar>]"
+                 RightSide ->
+                     "[<volumebar>] " ++ mute "[<status>]"
+        args = [ "-t", temp
+               , "-b", "•"
+               , "--"
+               , "-O", volumeNF
+               , "-o", muteNF
+               , "-C", pForeground p
+               , "-c", pHigh p
+               -- , "-c", "#8B4726"
+               ]
+     in Alsa mixer "Master" args
+
 
 weatherX' :: Station -> Args -> Rate -> Monitors
 weatherX' station = WeatherX station
@@ -127,9 +135,14 @@ diskIO p disks =
         pal  = (p <~> args)
      in DiskIO disks [] 10
 
-networkIO :: Palette -> Monitors
-networkIO p =
-    let args = [ "-t", up2NF ++ " [<txbar>] " ++ down2NF ++ " [<rxbar>]"
+networkIO :: Palette -> Orientation -> Monitors
+networkIO p o =
+    let temp = case o of
+                 LeftSide   ->
+                     up2NF ++ " [<txbar>] " ++ down2NF ++ " [<rxbar>]"
+                 RightSide  ->
+                     "[<txbar>] " ++ up2NF ++ " [<rxbar>] " ++ down2NF
+        args = [ "-t", temp
                , "-b", "•"
                ]
      in DynNetwork (p <~> args) 20

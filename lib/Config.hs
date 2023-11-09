@@ -2,6 +2,10 @@ module Config  where
 
 import Xmobar
 
+data Orientation
+    = LeftSide
+    | RightSide
+
 data Palette = Palette
     { pNormal     :: String
     , pLow        :: String

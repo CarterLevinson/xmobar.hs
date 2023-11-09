@@ -10,18 +10,23 @@ import Monitors
 --
 -- updates = "sh -c notify-send 'Pending Updates: $(checkupdates)"
 
-time, cal :: Date
-cal = Date
+cal :: Date
+cal =
+    Date
     "%B %e %Y"
     "calendar"
     360000
-time = Date
+
+time :: Date
+time =
+    Date
     (fc "#ECEFF4" "%H:%M")
     "time"
     10
 
 mailx :: MailX
-mailx = MailX
+mailx =
+    MailX
     [ ("G", "gmail/Inbox", "blue")
     , ("P", "posteo/Inbox", "orange")
     , ("WS", "workspace/Inbox", "purple")
@@ -30,36 +35,44 @@ mailx = MailX
     "mailx"
 
 uptime :: Monitors
-uptime = Uptime
+uptime =
+    Uptime
     [ "-t", "<days>d <hours>h" ]
     36000
 
-
 updates :: Command
-updates = Com "bash"
-    [ "-c", "checkupdates | wc -l | sed -r 's/^/ /;s/^ 0//'" ]
+updates =
+    Com (scriptify "pacman-updates.sh")
+    []
     "updates"
     3600
 
 runnables :: [Runnable]
 runnables =
-    [ Run $ XPropertyLog "_XMONAD_LOG_BOT"
-    , Run $ XPropertyLog "_XMONAD_LOG_MODE"
+    [ Run $ XPropertyLog
+        "_XMONAD_LOG_BOT"
+    , Run $ XPropertyLog
+        "_XMONAD_LOG_MODE"
+    , Run $ weatherX
+        baseDark
+        "KMDW"
+    -- , Run $ wireless
+    --     baseDark
+    --     "wlp8s0"
     , Run mailx
     , Run time
     , Run cal
     , Run uptime
     , Run updates
-    , Run $ weatherX baseDark "KMDW"
-    , Run $ wireless baseDark "wlp8s0"
     ]
 
 makeLayout :: String
 makeLayout =
     icon "arch-linux-white-20x20.xpm"
-    ++ " %_XMONAD_LOG_BOT% "
+    ++ " "
+    ++ lbar " %_XMONAD_LOG_BOT% "
     ++ " }{ "
-    ++ lbar (" " ++ mailNF)
+    ++ lbar (" " ++ mailMS)
     ++ "%mailx% "
     ++ lbar (" " ++ bellNF)
     ++ "%updates% "
@@ -68,7 +81,6 @@ makeLayout =
     ++ " %uptime% "
     ++ lbar (" " ++ calendarNF)
     ++ rbar " %time% "
-    -- ++ rbar " %cal% "
     ++ " "
     ++ icon "xmonad-logo-2022-20x20.xpm"
     ++ " "
