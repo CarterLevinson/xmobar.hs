@@ -53,8 +53,8 @@ base p = defaultConfig
     , allDesktops      = True
     , overrideRedirect = True
     , additionalFonts  =
-        [ "Symbols Nerd Font 14"
-        , "Material Symbols Sharp 14"
+        [ "Symbols Nerd Font 12"
+        , "Material Symbols Sharp 12"
         ]
     }
 
