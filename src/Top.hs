@@ -8,7 +8,6 @@ import Monitors
 player :: Command
 player =
     Com (scriptify "active-player.sh")
-    -- Com "/home/carterlevo/.xmobar/scripts/active-player.sh"
     []
     "player"
     10
@@ -46,15 +45,19 @@ runnables :: [Runnable]
 runnables =
     [ Run $ XPropertyLog
         "_XMONAD_LOG_TOP"
-    , Run $ diskIO
-        baseDark
-        [ ("/", "/ <total> <read> <write>")
-        , ("/home", "~ <total> <read> <write>")
-        ]
+    -- , Run $ diskIO
+    --     baseDark
+    --     [ ("/dev/nvme0n1", "R: <read> W: <write>") ]
+    -- , Run $ diskIO
+    --     baseDark
+    --     [ ("/", "/ <total> <read> <write>")
+    --     , ("/home", "~ <total> <read> <write>")
+    --     ]
     , Run $ diskU
         baseDark
         [ ("/", "/ [<usedbar>]")
         , ("/home", "~ [<usedbar>]")
+        , ("/data", diskNF ++ " [<usedbar>]")
         ]
     , Run $ masterVolumeAlsa
         baseDark
@@ -63,9 +66,9 @@ runnables =
     , Run $ wireless
         baseDark
         "wlp8s0"
-    , Run $ networkIO
-        baseDark
-        LeftSide
+    -- , Run $ networkIO
+    --     baseDark
+    --     LeftSide
     , Run $ cpuFreq
         baseDark
     , Run $ cpuBar
@@ -97,8 +100,8 @@ makeLayout =
     ++ "] {"
     ++ lbar (" " ++ serverNF)
     ++ " %disku% "
-    ++ lbar " %dynnetwork% "
-    ++ click (scriptify "wifi-toggle.sh") "[%wifi%]"
+    -- ++ lbar " %dynnetwork% "
+    ++ lbar (" " ++ click (scriptify "wifi-toggle.sh") "[%wifi%]")
     ++ " %wlp8s0wi%"
 
 

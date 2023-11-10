@@ -131,9 +131,8 @@ diskU p disks =
 
 diskIO :: Palette -> DiskSpec -> Monitors
 diskIO p disks =
-    let args = []
-        pal  = (p <~> args)
-     in DiskIO disks [] 10
+    let args = ["-S", "On"]
+     in DiskIO disks (p <~> args) 10
 
 networkIO :: Palette -> Orientation -> Monitors
 networkIO p o =

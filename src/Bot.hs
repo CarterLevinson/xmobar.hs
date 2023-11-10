@@ -42,10 +42,25 @@ uptime =
 
 updates :: Command
 updates =
-    Com (scriptify "pacman-updates.sh")
+    Com (scriptify "pacman-count.sh")
     []
     "updates"
     3600
+
+notify :: Command
+notify =
+    Com (scriptify "dunst-status.sh")
+    []
+    "notify"
+    20
+
+notifyCount :: Command
+notifyCount =
+    Com (scriptify "dunst-count.sh")
+    []
+    "notify-count"
+    600
+
 
 runnables :: [Runnable]
 runnables =
@@ -61,9 +76,11 @@ runnables =
     --     "wlp8s0"
     , Run mailx
     , Run time
-    , Run cal
+    -- , Run cal
     , Run uptime
+    , Run notify
     , Run updates
+    , Run notifyCount
     ]
 
 makeLayout :: String
@@ -72,12 +89,17 @@ makeLayout =
     ++ " "
     ++ lbar " %_XMONAD_LOG_BOT% "
     ++ " }{ "
-    ++ lbar (" " ++ mailMS)
+    ++ lbar (" " ++ click (scriptify "switch-email.sh") (
+        rclick "wmctrl -s 0" mailMS))
     ++ "%mailx% "
-    ++ lbar (" " ++ bellNF)
-    ++ "%updates% "
+    -- ++ lbar (" " ++ bellAltNF)
+    ++ lbar (" " ++ click "dunstctl set-paused toggle" (
+        rclick "dunstctl history-pop" "%notify%"))
+    ++ "%notify-count% "
+    ++ lbar (" " ++ updateNF)
+    ++ " %updates%"
     ++ hbox " %KMDW% "
-    ++ lbar (" " ++ clockNF)
+    ++ lbar (" " ++ hourglassNF)
     ++ " %uptime% "
     ++ lbar (" " ++ calendarNF)
     ++ rbar " %time% "

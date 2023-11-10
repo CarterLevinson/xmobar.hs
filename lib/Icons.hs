@@ -11,6 +11,7 @@ nf             = fn 1
 archNF         = nf "\xF303"
 
 bellNF         = nf "\xF0A2"
+-- bellAltNF      = nf "\xF"
 lambdaNF       = nf "\xFB26"
 piNF           = nf "\xE22C"
 clockNF        = nf "\xF64F"
@@ -32,6 +33,8 @@ down2NF        = nf "\xF175"
 musicNF        = nf "\xF001"
 playNF         = nf "\xF040A"
 pauseNF        = nf "\xF03E4"
+hourglassNF    = nf "\xF06AD"
+updateNF       = nf "\xF06B0"
 
 
 -- storage = "\xe1db"

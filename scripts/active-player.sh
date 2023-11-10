@@ -4,11 +4,12 @@ activePlayer=$(playerctl -l 2>&1 | head -n 1)
 
 case "$activePlayer" in
   spotify*)
+    # font awesome spotify logo
     printf "<fn=1>\uF1BC</fn>";;
   firefox*)
     # firefox dev logo
     # printf "<fn=1>\uE745</fn>";;
-    # firefox fontawesome
+    # font aeswsome firefox logo
     printf "<fn=1>\uF269</fn>";;
     # firefox material design
     # printf "<fn=1>\uF0239</fn>" ;;
